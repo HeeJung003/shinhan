@@ -6,6 +6,7 @@ import java.util.Set;
 
 import com.shinhan.day11.collection.Board;
 
+
 public class MapExample {
 	public static void main(String[] args) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
@@ -17,25 +18,16 @@ public class MapExample {
 		int maxScore = 0; // 최고 점수를 저장하는 변수
 		int totalScore = 0; // 점수 합계를 저장하는 변수
 		
-		//map에서 결과 확인하는 방법
-		//1. keySet
-		Set<String> entry = map.keySet();
-		
-		for(String en: entry) {
-			System.out.println(en + " -> " + map.get(entry));
-		}
-		
-		
-		
-		//2. entrySet
-
-//		Set<Map.Entry<String, Integer>> entrySet = map.entrySet();
-//		for(Map.Entry<String, Integer> entry : entrySet) {
-//			if(entry.getValue()>maxScore) {
-//				name = entry.getKey();
-//				maxScore = entry.getValue();
-//			}
-//			totalScore += entry.getValue();
-//		}
+		for(Map.Entry<String, Integer> entry : map.entrySet()) {
+			totalScore += entry.getValue();
+			if(entry.getValue()>maxScore) {
+				maxScore = entry.getValue();
+				name = entry.getKey();
+			}
+		}		
+		System.out.println("최고 점수를 받은 아이디는 : " + name);
+		System.out.println("최고 점수는 : " + maxScore);
+		System.out.println("점수 합계 : " + totalScore);
+		System.out.println("평균 : " + (totalScore/map.size()));
 	}
 }
