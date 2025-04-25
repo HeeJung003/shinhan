@@ -108,4 +108,51 @@ public class DeptDAO {
 				.build();
 		return dept;
 	}
+	
+	//부서 삭제하기
+	public int deleteByDeptId(int deptId) {
+		int result = 0;
+		Connection conn = DBUtil.getConnection();
+		PreparedStatement st = null;
+		String sql = "delete from departments where department_id = ?";
+		
+		try {
+			st = conn.prepareStatement(sql);
+			st.setInt(1, deptId);
+			
+			result = st.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbDisconnect(conn, st, null);
+		}
+		return result;
+	}
+	
+	//부서 추가하기
+	public int insertDept(DeptDTO dept) {
+		int result = 0;
+		Connection conn = DBUtil.getConnection();
+		PreparedStatement st = null;
+		String sql = """
+				insert into departments 
+				values (?,?,?,?)
+				""";
+		
+		try {
+			st = conn.prepareStatement(sql);
+			st.setInt(1, dept.getDepartment_id());
+			st.setString(2, dept.getDepartment_name());
+			st.setInt(3, dept.getManager_id());
+			st.setInt(4, dept.getLocation_id());
+			
+			result = st.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbDisconnect(conn, st, null);
+		}
+		return result;
+		
+	}
 }

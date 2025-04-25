@@ -21,4 +21,14 @@ public class DeptService {
 	public int updateDept(DeptDTO dept) {
 		return deptDAO.updateDept(dept);
 	}
+	
+	//부서 삭제하기
+	public int deleteByDeptId(int deptId) {
+		return deptDAO.deleteByDeptId(deptId);
+	}
+	
+	//부서 추가하기
+	public int insertDept(DeptDTO dept) {
+		return deptDAO.insertDept(dept);
+	}
 }
